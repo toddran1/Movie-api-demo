@@ -1,26 +1,27 @@
 import {Request, Response} from 'express';
 import {fetchMoviesByYear, fetchMovieEditors} from '../service/movieService';
+import {Movie} from '../models/movieModel';
 
-// Controller to handle fetching movies by year.
+// Controller to handle fetching movies by year
 export const getMoviesByYear = async (req: Request, res: Response) => {
     const {year} = req.params;
 
     try {
-        const movies = await fetchMoviesByYear(year);
+        let movies: Movie[] = await fetchMoviesByYear(year);
 
-        const moviesWithEditors = await Promise.all(
-            movies.map(async (movie: any) => {
-                const editors = await fetchMovieEditors(movie.id);
+        // Get editors for each movie
+        movies = await Promise.all(
+            movies.map(async (movie: Movie) => {
                 return {
                     title: movie.title,
                     release_date: movie.release_date,
                     vote_average: movie.vote_average,
-                    editors: editors
+                    editors: await fetchMovieEditors(movie?.id || 0)
                 };
             })
         );
 
-        res.json(moviesWithEditors);
+        res.json(movies);
     } catch (error) {
         console.error('Error requesting movies:', error);
         res.status(500).json({error: 'Failed to fetch movies'});
