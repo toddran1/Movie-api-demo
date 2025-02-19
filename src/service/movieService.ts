@@ -20,7 +20,9 @@ export const fetchMoviesByYear = async (year: string): Promise<Movie[]> => {
             }
         });
 
-        return moviesResponse.data.results.map((movie: Movie) => ({
+        return moviesResponse.data.results
+        .sort((a: Movie, b: Movie) => b.vote_average - a.vote_average)
+        .map((movie: Movie) => ({
             id: movie.id,
             title: movie.title,
             release_date: movie.release_date,

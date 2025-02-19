@@ -20,7 +20,7 @@ export const getMoviesByYear = async (req: Request, res: Response) => {
                 };
             })
         );
-
+        
         res.json(movies);
     } catch (error) {
         console.error('Error requesting movies:', error);
