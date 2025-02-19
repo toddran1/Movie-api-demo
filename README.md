@@ -11,7 +11,7 @@ This is a **Node.js** and **TypeScript** API that fetches movies for a given yea
 - **Express.js** for handling API requests.
 
 - **Environment variable support** for API keys.
-- To create your own key go to: 
+- To create your own key go to: https://www.themoviedb.org/
 
 PLEASE USE YOUR OWN API KEY!
 
