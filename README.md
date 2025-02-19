@@ -12,7 +12,8 @@ This is a **Node.js** and **TypeScript** API that fetches movies for a given yea
 - **Environment variable support** for API keys.
 
 PLEASE USE YOUR OWN API KEY!
- You can add your key in the .env file.
+-
+-You can add your key in the .env file.
 - 
 - **Express.js** for handling API requests.
 
